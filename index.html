@@ -475,13 +475,17 @@ body{
 .field label{display:block;font-size:10px;font-weight:600;color:var(--muted);margin-bottom:3px;font-family:'JetBrains Mono',monospace;text-transform:uppercase;letter-spacing:.5px}
 .field input,.field select{
   width:100%;
-  border:1px solid rgba(255,255,255,.12);
-  border-radius:8px;padding:8px 11px;
+  border:1px solid rgba(255,255,255,.15);
+  border-radius:8px;
+  padding:8px 11px;
   font-size:13px;
+  background:#1A2236;
+  color:#F1F2F6;
+  -webkit-appearance:none;
+  appearance:none;
   font-family:'Inter',sans-serif;
-  color:var(--text);
-  background:rgba(255,255,255,.05);
-  outline:none;transition:.15s;
+  outline:none;
+  transition:.15s;
 }
 .field input:focus,.field select:focus{
   border-color:var(--cyan);
@@ -875,16 +879,15 @@ td .tag,th .tag{white-space:nowrap}
 }
 
 /* ── O₂ Cards ── */
-.o2-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:10px}
+.o2-grid{display:flex;flex-direction:column;gap:8px;margin-top:10px}
 .o2-card{border-radius:12px;overflow:hidden;border:1px solid rgba(255,255,255,.07)}
 .o2-hdr{padding:14px 16px;display:flex;align-items:center;justify-content:space-between;cursor:pointer;transition:.15s}
 .o2-hdr:hover{filter:brightness(1.1)}
 .o2-hdr:active{transform:scale(.98)}
-.o2-name{font-family:'JetBrains Mono',monospace;font-size:11px;font-weight:700;color:white;letter-spacing:.3px}
-.o2-fio2{font-size:10px;color:rgba(255,255,255,.65);margin-top:3px}
+.o2-name{font-family:'JetBrains Mono',monospace;font-size:11px;font-weight:700;color:#fff;letter-spacing:.3px;text-shadow:0 1px 4px rgba(0,0,0,.8)}
+.o2-fio2{font-size:10px;color:rgba(255,255,255,.92);margin-top:3px;text-shadow:0 1px 3px rgba(0,0,0,.7)}
 .o2-body{display:none;padding:12px 14px;background:var(--raised);font-size:12px;line-height:1.6;color:var(--text-secondary)}
 .o2-body.show{display:block}
-@media(max-width:480px){.o2-grid{grid-template-columns:1fr}}
 
 /* ══ ESCALAS CLÍNICAS ══ */
 .scale-item{
@@ -936,10 +939,36 @@ td .tag,th .tag{white-space:nowrap}
 }
 .section-title{
   font-family:'JetBrains Mono',monospace;
-  font-size:10px;font-weight:700;letter-spacing:.8px;
+  font-size:10px;font-weight:700;letter-spacin
+.perfil-bar{display:flex;gap:6px;margin-bottom:12px;flex-wrap:wrap}
+.perfil-btn{
+  flex:1;min-width:70px;padding:8px 6px;border-radius:8px;
+  border:1px solid rgba(255,255,255,.12) !important;
+  background:#1A2236 !important;
+  color:#B0B8C8 !important;
+  cursor:pointer;text-align:center;
+  transition:all .15s;
+  font-family:'Inter',sans-serif;
+  font-size:11px;font-weight:600;
+  -webkit-appearance:none;
+  appearance:none;
+}
+.perfil-btn:hover{border-color:var(--cyan);color:var(--text)}
+.perfil-btn.active{background:rgba(0,212,255,.18) !important;border-color:var(--cyan) !important !important;color:var(--cyan) !important;font-weight:700}
+g:.8px;
   color:var(--muted);text-transform:uppercase;
   margin:10px 0 6px;padding-left:2px;
 }
+
+.path-detail{display:none}
+.path-detail.show{display:block}
+.drug-card.open > div > .drug-body{display:block}
+
+select option{background:#1A2236;color:#F
+.path-chip.active{background:var(--cyan);color:var(--bg);border-color:var(--cyan)}
+1F2F6}
+
+.drug-card.open .drug-body,.drug-card.open>div>.drug-body,.drug-card.open>div>div>.drug-body{display:block!important}
 </style>
 </head>
 <body>
@@ -1016,13 +1045,7 @@ td .tag,th .tag{white-space:nowrap}
     <span class="badge" style="background:rgba(56,182,224,.15);border:1px solid rgba(56,182,224,.35);color:var(--cyan)">R1 · 2026</span>
   </div>
   <div style="position:relative">
-    <div class="search-wrap">
-      <div style="position:relative">
-        <span class="search-icon">🔍</span>
-        <input class="search-input" id="globalSearch" aria-label="Buscar fármacos e protocolos" type="text" placeholder="Buscar droga, dose, protocolo, escala..." oninput="searchGlobal(this.value)" autocomplete="off"/>
-      </div>
-    </div>
-    <div class="search-results" id="searchResults"></div>
+    
   </div>
   <div class="home-grid">
     <div class="home-card" style="background:linear-gradient(135deg,#D4580A,#E87040)" onclick="goTo('p-plantao')">
@@ -1477,7 +1500,7 @@ td .tag,th .tag{white-space:nowrap}
 </div>
           <div class="sh sh-pink">TOT sem cuff (abaixo de 8 anos)</div>
           <div style="background:var(--gray);border-radius:8px;padding:10px;margin-bottom:8px">
-            <div style="font-family:'IBM Plex Mono',monospace;font-size:11px;font-weight:700;color:var(--navy)">FÓRMULA TOT: (idade/4) + 4</div>
+            <div style="font-family:'IBM Plex Mono',monospace;font-size:11px;font-weight:700;color:var(--cyan)">FÓRMULA TOT: (idade/4) + 4</div>
           </div>
           <div class="sh sh-pink">Doses pediátricas — principais</div>
           <div class="dr dr-b"><div class="dn"><strong>Propofol</strong><small>Indução</small></div><div class="dc"><span class="dv" id="pd-prop">— mg</span><span class="dd">2,5–3,5 mg/kg IV</span></div></div>
@@ -31660,11 +31683,18 @@ function toggleAcc(hdr) {
   }
 }
 function toggleDrug(hdr) {
-  /* Aceita: string ID do drug-card OU elemento .drug-hdr */
+  /* Aceita string ID do drug-card OU elemento .drug-hdr */
   var card = (typeof hdr === 'string')
     ? document.getElementById(hdr)
-    : hdr.parentElement;
-  if (card) card.classList.toggle('open');
+    : (hdr.closest ? hdr.closest('.drug-card') : hdr.parentElement);
+  if (!card) return;
+  var wasOpen = card.classList.contains('open');
+  card.classList.toggle('open');
+  /* Forçar display via JS para cobrir todos os casos de aninhamento */
+  var bodies = card.querySelectorAll('.drug-body');
+  bodies.forEach(function(body) {
+    body.style.display = wasOpen ? 'none' : 'block';
+  });
 }
 function toggleCaso(hdr) { hdr.parentElement.classList.toggle('open'); }
 
@@ -32510,6 +32540,18 @@ function calcInfusion() {
         <div class="formula-eq">${formula} = <strong>${vel.toFixed(1)} mL/h</strong></div>
       </div>
     `;
+  }
+
+  var _drugConc = {nora:16,adre:16,dopa:1000,dobu:1000,dexm:4,remi:50,ntg:200,ntp:200};
+  var _wrapEl = document.getElementById('inf-mlh-wrap');
+  var _mlhEl = document.getElementById('inf-mlh');
+  if (_drugConc[drug] && p && !isNaN(dose)) {
+    var _mult = (drug === 'dexm') ? 1 : 60;
+    var _mlh = (dose * p * _mult) / _drugConc[drug];
+    if (_mlhEl) _mlhEl.textContent = _mlh.toFixed(1) + ' ml/h';
+    if (_wrapEl) _wrapEl.style.display = 'block';
+  } else {
+    if (_wrapEl) _wrapEl.style.display = 'none';
   }
 }
 
